@@ -1,0 +1,6 @@
+npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4
+npm install -g sass
+npm install --save next-auth
+npm install prisma -D
+npm install @prisma/client
+npx prisma init
