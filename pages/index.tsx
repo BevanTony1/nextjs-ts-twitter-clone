@@ -1,8 +1,12 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.scss'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 export default function Home() {
+
+  const [session, loading] = useSession()
+
   return (
     <div>
       <Head>
@@ -11,8 +15,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div>
-      </div>
+
 
 
     </div >
