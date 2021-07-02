@@ -21,7 +21,10 @@
   "include": [
     "next-env.d.ts",
     "**/*.ts",
-    "**/*.tsx"
+    "**/*.tsx",
+    "component/Navbar.js",
+    "component/Navbar.js",
+    "pages/api/auth/[...nextauth].ts"
   ],
   "exclude": [
     "node_modules"

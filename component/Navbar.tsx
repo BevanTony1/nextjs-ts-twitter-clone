@@ -25,9 +25,10 @@ import { signIn, signOut, useSession } from 'next-auth/client'
 
 
 
-export default function Navbar() {
+export default function Navbar({ }) {
     const { isOpen, onToggle } = useDisclosure();
     const [session, loading] = useSession()
+
     return (
 
         <Box>
