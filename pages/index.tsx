@@ -2,6 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
 import { useSession } from 'next-auth/client'
 import { Profile } from '../component/Profile'
+import Landing from '../component/Landing'
 export default function Home() {
 
   const [session, loading] = useSession()
@@ -19,7 +20,7 @@ export default function Home() {
         <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
 
       ) : (
-        <div>Tseting</div>
+        <Landing />
       )}
 
 
