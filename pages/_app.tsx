@@ -3,6 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import Navbar from '../component/Navbar'
+import Footer from '../component/Footer'
 
 function MyApp({ Component, pageProps }: AppProps) {
 
@@ -11,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Provider session={pageProps.session}>
         <Navbar />
         <Component {...pageProps} />
+        <Footer />
       </Provider>
     </ChakraProvider>
   )

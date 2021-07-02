@@ -4,12 +4,11 @@ declare module "next-auth" {
     /**
      * Returned by `useSession`, `getSession` and received as a prop on the `Provider` React Context
      */
-    interface Session {
+    interface Session<undefined> {
         user: {
-            /** The user's postal address. */
             name: string
-            email: String
-            image: String
+            email: string
+            image: string
         }
     }
 }
