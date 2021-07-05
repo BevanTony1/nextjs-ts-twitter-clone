@@ -1,12 +1,21 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.scss'
-import { useSession } from 'next-auth/client'
+import { useSession, getSession } from 'next-auth/client'
 import { Profile } from '../component/Profile'
+import { Todo } from '../component/Todo'
+import { Loading } from '../component/Loading'
 import Landing from '../component/Landing'
+
+
+
 export default function Home() {
 
   const [session, loading] = useSession()
+  if (loading) {
+    return <Loading />
+  }
 
+  console.log(session)
 
   return (
     <div>
@@ -17,8 +26,10 @@ export default function Home() {
       </Head>
 
       {session ? (
-        <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
-
+        <div>
+          <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
+          <Todo />
+        </div>
       ) : (
         <Landing />
       )}

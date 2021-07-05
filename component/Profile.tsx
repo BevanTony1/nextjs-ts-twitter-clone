@@ -10,17 +10,18 @@ import {
     useColorModeValue,
 } from '@chakra-ui/react';
 
-interface Session {
-    name: string
-    email: string
-    image: string
+
+interface User {
+    name?: string
+    email?: string
+    image?: string
 }
 
 
-export const Profile: React.FC<Session> = ({ name, email, image }) => {
-
+export const Profile: React.FC<User> = ({ name, email, image }) => {
     return (
         <Center py={6}>
+
             <Box
                 maxW={'270px'}
                 w={'full'}
@@ -60,6 +61,6 @@ export const Profile: React.FC<Session> = ({ name, email, image }) => {
 
                 </Box>
             </Box>
-        </Center>
+        </Center >
     );
 }

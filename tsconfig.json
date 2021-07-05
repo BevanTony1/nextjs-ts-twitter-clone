@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "typeRoots": [
+      "./types/next-auth.d"
+    ],
     "lib": [
       "dom",
       "dom.iterable",
