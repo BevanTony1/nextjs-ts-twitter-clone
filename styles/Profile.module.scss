@@ -1,0 +1,22 @@
+.container{
+    background-color: #ffff;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(210, 210, 210);
+    border-radius: 8px;
+    text-align: center;
+    justify-items: center;
+    margin: .8em;
+}
+
+.backdrop{
+
+    img{
+        margin-bottom: -20px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        height: 60px;
+        width: 100%;
+
+    }   
+}

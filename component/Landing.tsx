@@ -32,7 +32,7 @@ export default function Landing() {
                         fontWeight={600}
                         fontSize={{ base: '2xl', sm: '4xl', md: '6xl' }}
                         lineHeight={'110%'}>
-                        My Todo App<br />
+                        DemoApp<br />
                         <Text as={'span'} color={'green.400'}>
                             NextJS/TypeScript
             </Text>

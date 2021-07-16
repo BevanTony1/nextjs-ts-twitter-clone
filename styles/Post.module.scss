@@ -1,0 +1,24 @@
+.container {
+    border: 1px solid black;
+    background-color: #ffff;
+    border-radius: 5px;
+    padding: 0.5px;
+
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr;
+    gap: 0px 0px;
+    grid-template-areas:
+        "sidebar main-area main-area"
+        "sidebar main-area main-area"
+        "sidebar main-area main-area";
+}
+
+.sidebar {
+    grid-area: sidebar;
+    border-right: 1px solid black;
+}
+
+.mainarea {
+    grid-area: main-area;
+}
