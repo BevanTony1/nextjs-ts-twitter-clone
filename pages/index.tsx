@@ -1,11 +1,13 @@
 import Head from 'next/head'
 // import styles from '../styles/Home.module.scss'
+import { useState } from 'react'
 import { useSession, getSession } from 'next-auth/client'
 import { Profile } from '../component/Profile'
 import { Loading } from '../component/Loading'
 import Landing from '../component/Landing'
 import { PostCard } from '../component/PostCard'
 import CreatePost from '../component/CreatePost'
+import ModalPost from '../component/ModalPost'
 import { Container, Grid } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 import { Post, User } from '@prisma/client'
@@ -21,7 +23,11 @@ export async function getServerSideProps() {
             image: true
           },
         }
+      },
+      orderBy: {
+        updatedAt: 'desc'
       }
+
     });
     return {
       props: { posts }
@@ -33,12 +39,13 @@ export async function getServerSideProps() {
 }
 
 interface HomeProps {
-  posts: Post[] & User
+  posts: Post & User
 }
 
 
 
 export default function Home(props: HomeProps) {
+  const [posts, setPosts] = useState<any>(props.posts)
 
 
   const [session, loading] = useSession()
@@ -66,14 +73,18 @@ export default function Home(props: HomeProps) {
             <Grid gap={3}>
 
               <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
-              <CreatePost />
-              {props.posts.map((post: object, key: number) => (
+              <CreatePost onAddPosts={(post: Post & { user: User }) => {
+                setPosts([...posts, post]);
+              }} />
+              {posts.map((post: HomeProps, key: number) => (
                 <PostCard posts={post} key={key} />
               ))}
             </Grid>
           </Container>
         ) : (
-          <Landing />
+          <>
+            <Landing />
+          </>
         )
       }
 

@@ -5,14 +5,59 @@ import prisma from '../../../lib/prisma';
 // Required fields in body: title
 // Optional fields in body: content
 export default async function handle(req: any, res: any) {
-    const { text } = req.body;
-    const session = await getSession({ req });
-    const result = await prisma.post.create({
-        data: {
-            title: text,
-            userId: session?.user.id
+    if (req.method === 'POST') {
+        try {
+            const { text } = req.body;
+            const session = await getSession({ req });
+            const posts = await prisma.post.create({
+                data: {
+                    title: text,
+                    userId: session?.user.id
 
-        },
-    });
-    res.json(result);
+                },
+                include: {
+                    User: true
+                },
+
+            });
+            res.status(200).json({ ...posts });
+        }
+        catch (err) {
+            res.status(400).json({ message: 'Something went wrong ' + err })
+        }
+    }
+    if (req.method === 'PUT') {
+        try {
+
+            const { id, text } = req.body
+            const result = await prisma.post.update({
+                where: {
+                    id: id
+                },
+                data: {
+                    title: text
+                }
+            })
+            res.status(200).json({ result });
+        } catch (err) {
+            res.status(400).json({ message: 'Something went wrong ' + err })
+        }
+    }
+
+    if (req.method === 'DELETE') {
+        try {
+
+            const { id } = req.body
+            const result = await prisma.post.delete({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json({ result })
+        } catch (err) {
+            res.status(400).json({ message: 'Something went wrong ' + err })
+        }
+
+
+    }
 }

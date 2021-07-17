@@ -1,3 +1,4 @@
+import NextLink from 'next/link'
 import {
     Box,
     Flex,
@@ -14,6 +15,12 @@ import {
     useColorModeValue,
     useBreakpointValue,
     useDisclosure,
+    Menu,
+    MenuButton,
+    Avatar,
+    MenuList,
+    MenuItem,
+    MenuGroup,
 } from '@chakra-ui/react';
 import {
     HamburgerIcon,
@@ -28,6 +35,7 @@ import { signIn, signOut, useSession } from 'next-auth/client'
 export default function Navbar({ }) {
     const { isOpen, onToggle } = useDisclosure();
     const [session, loading] = useSession()
+
 
     return (
 
@@ -60,7 +68,7 @@ export default function Navbar({ }) {
                         textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
                         fontFamily={'heading'}
                         color={useColorModeValue('gray.800', 'white')}>
-                        <Link href='/'> TodoApp</Link>
+                        <Link href='/'> SampleApp</Link>
                     </Text>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -84,9 +92,21 @@ export default function Navbar({ }) {
                 </>
                 }
                 {session && <>
-                    <Stack>
-                        <Button onClick={() => signOut()}>Sign out</Button>
-                    </Stack>
+                    <Menu>
+                        <MenuButton >
+                            <Avatar src={session?.user.image} />
+                        </MenuButton>
+                        <MenuList>
+                            <MenuGroup title='Profile'>
+                                <Link href={'/profile'}><MenuItem>View Profile</MenuItem></Link>
+                            </MenuGroup>
+                            <MenuGroup title='Sign out'>
+                                <MenuItem onClick={() => signOut()} bg={'pink.200'} m='2'> Sign out</MenuItem>
+                            </MenuGroup>
+                        </MenuList>
+                    </Menu>
+
+
                 </>}
                 {/* <Stack
 

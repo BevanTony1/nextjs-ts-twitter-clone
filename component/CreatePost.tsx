@@ -1,3 +1,4 @@
+import { User, Post } from '@prisma/client'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import {
     Stack,
@@ -9,11 +10,17 @@ import {
     Container,
 } from '@chakra-ui/react';
 
+interface CreatePostProps {
+    onAddPosts: (post: Post & { user: User }) => void;
+}
+
+
 type FormData = {
     text: string
 }
 
-export default function CreatePost() {
+
+export default function CreatePost(props: CreatePostProps) {
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         try {
@@ -25,6 +32,7 @@ export default function CreatePost() {
             })
             setValue('text', '')
             const res = await req.json();
+            props.onAddPosts(res);
         } catch (err) {
             console.log(err)
         }

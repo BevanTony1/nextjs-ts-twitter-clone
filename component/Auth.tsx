@@ -12,8 +12,7 @@ import {
     Text,
     useColorModeValue,
 } from '@chakra-ui/react';
-import { useForm, SubmitHandler } from 'react-hook-form'
-import { useRouter } from 'next/router'
+
 
 
 interface Props {
@@ -70,16 +69,3 @@ const AuthContent = () => {
     );
 }
 
-
-const FullScreenAuth: React.FC<Props> = () => {
-    const onSubmit: SubmitHandler<Props> = data => console.log(data);
-
-    return (
-        <div>
-            <AuthContent />
-        </div>
-    )
-}
-
-
-export default FullScreenAuth;
