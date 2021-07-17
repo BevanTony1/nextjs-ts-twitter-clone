@@ -23,7 +23,7 @@ export const Profile: React.FC<User> = ({ name, email, image }) => {
         <Center py={6}>
 
             <Box
-                maxW={'270px'}
+                maxW={'450px'}
                 w={'full'}
                 bg={useColorModeValue('white', 'gray.800')}
                 boxShadow={'2xl'}

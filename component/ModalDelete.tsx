@@ -19,7 +19,7 @@ export default function DeleteModal(props: any) {
       headers: { 'Content-Type': 'application/json' },
       method: 'DELETE',
       body: JSON.stringify({
-        id: props.posts.posts.id
+        id: props.posts.id
       })
     })
   };
@@ -42,7 +42,7 @@ export default function DeleteModal(props: any) {
               <Button colorScheme="blue" mr={3} onClick={onClose}>
                 Close
             </Button>
-              <Button type='submit' colorScheme="red">Delete</Button>
+              <Button type='submit' onClick={onClose} colorScheme="red">Delete</Button>
             </ModalFooter>
           </ModalContent>
         </form>

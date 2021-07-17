@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import useSWR from 'swr'
 // import styles from '../styles/Home.module.scss'
 import { useState } from 'react'
 import { useSession, getSession } from 'next-auth/client'
@@ -7,10 +8,11 @@ import { Loading } from '../component/Loading'
 import Landing from '../component/Landing'
 import { PostCard } from '../component/PostCard'
 import CreatePost from '../component/CreatePost'
-import ModalPost from '../component/ModalPost'
 import { Container, Grid } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 import { Post, User } from '@prisma/client'
+
+
 
 export async function getServerSideProps() {
   try {
@@ -48,6 +50,7 @@ export default function Home(props: HomeProps) {
   const [posts, setPosts] = useState<any>(props.posts)
 
 
+  console.log(posts)
   const [session, loading] = useSession()
 
 
@@ -70,16 +73,14 @@ export default function Home(props: HomeProps) {
       {
         session ? (
           <Container>
-            <Grid gap={3}>
 
-              <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
-              <CreatePost onAddPosts={(post: Post & { user: User }) => {
-                setPosts([...posts, post]);
-              }} />
-              {posts.map((post: HomeProps, key: number) => (
-                <PostCard posts={post} key={key} />
-              ))}
-            </Grid>
+            <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
+            <CreatePost onAddPosts={(post: Post & { user: User }) => {
+              setPosts([...posts, post]);
+            }} />
+            {posts.map((post: HomeProps, key: number) => (
+              <PostCard posts={post} key={key} />
+            ))}
           </Container>
         ) : (
           <>

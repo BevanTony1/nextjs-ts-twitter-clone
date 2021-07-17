@@ -38,9 +38,7 @@ export default function Landing() {
             </Text>
                     </Heading>
                     <Text color={'gray.500'}>
-                        Monetize your content by charging your most loyal readers and reward
-                        them loyalty points. Give back to your loyal readers by granting
-                        them access to your pre-releases and sneak-peaks.
+                        CRUD Demo Application using NextJS as the frontend framework and Prisma as the Database
           </Text>
                     <Stack
                         direction={'column'}

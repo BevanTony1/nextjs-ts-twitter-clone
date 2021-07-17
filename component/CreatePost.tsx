@@ -1,5 +1,6 @@
 import { User, Post } from '@prisma/client'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { useSession } from 'next-auth/client'
 import {
     Stack,
     FormControl,
@@ -8,6 +9,7 @@ import {
     useColorModeValue,
     Heading,
     Container,
+    Avatar,
 } from '@chakra-ui/react';
 
 interface CreatePostProps {
@@ -21,6 +23,9 @@ type FormData = {
 
 
 export default function CreatePost(props: CreatePostProps) {
+
+    const [session] = useSession()
+
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         try {
@@ -51,12 +56,14 @@ export default function CreatePost(props: CreatePostProps) {
                 textAlign={'center'}
                 mb={5}>
                 Create Post
-        </Heading>
+                
+            </Heading>
             <Stack
                 direction={{ base: 'column', md: 'row' }}
                 as={'form'}
                 spacing={'12px'}
                 onSubmit={handleSubmit(onSubmit)}>
+                <Avatar src={session?.user.image}/>
                 <FormControl>
                     <Input
                         variant={'solid'}

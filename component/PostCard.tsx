@@ -1,6 +1,6 @@
-import { Box, Avatar, Flex, Text, Container, Spacer, Menu, MenuButton, MenuItem, MenuList, MenuGroup } from '@chakra-ui/react'
+import { Box, Avatar, Flex, Text, Container, Spacer, Menu, MenuButton, MenuItem, MenuList, MenuGroup, Heading } from '@chakra-ui/react'
 import { EditIcon } from '@chakra-ui/icons'
-import ModalPost from '../component/ModalPost'
+import ModalUpdate from './ModalUpdate'
 import ModalDelete from '../component/ModalDelete'
 
 
@@ -13,23 +13,30 @@ interface Props {
 
 export const PostCard: React.FC<Props> = (props: Props) => {
 
-
+    console.log(props.posts)
 
     return (
-        <Box p={4} bg={'gray.200'}>
+        <Container
+            maxW={'lg'}
+            bg={'whiteAlpha.100'}
+            boxShadow={'xl'}
+            rounded={'lg'}
+            p={6}
+            marginBottom={"15px"}
+            direction={'column'}>
+
             <Flex>
                 <Avatar src={props.posts.User.image} />
                 <Text>{props.posts.User.name}</Text>
-                {/* <Text>{props.posts.updatedAt.toLocaleDateString()}</Text> */}
                 <Spacer />
                 <Menu>
                     <MenuButton>
                         <EditIcon />
                     </MenuButton>
                     <MenuList>
-                        <MenuGroup title='Options'>
-                            <MenuItem><ModalPost posts={props} /></MenuItem>
-                            <MenuItem><ModalDelete posts={props} /></MenuItem>
+                        <MenuGroup title='Settings'>
+                            <MenuItem><ModalUpdate posts={props.posts} /></MenuItem>
+                            <MenuItem><ModalDelete posts={props.posts} /></MenuItem>
                         </MenuGroup>
                     </MenuList>
 
@@ -39,6 +46,6 @@ export const PostCard: React.FC<Props> = (props: Props) => {
 
                 <h1>{props.posts.title}</h1>
             </Container>
-        </Box>
+        </Container >
     )
 }
