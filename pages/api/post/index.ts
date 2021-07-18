@@ -6,14 +6,6 @@ import prisma from '../../../lib/prisma';
 // Optional fields in body: content
 export default async function handle(req: any, res: any) {
 
-    if (req.method === 'GET') {
-        try {
-            console.log('nag GET lugar ko?')
-        } catch (err) {
-            res.status(400).json({ messsage: 'Something went wrong' + err })
-        }
-    }
-
     if (req.method === 'POST') {
         try {
             const { text } = req.body;

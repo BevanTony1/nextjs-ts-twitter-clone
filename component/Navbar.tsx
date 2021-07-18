@@ -37,6 +37,7 @@ export default function Navbar({ }) {
     const [session, loading] = useSession()
 
 
+
     return (
 
         <Box>
@@ -64,12 +65,14 @@ export default function Navbar({ }) {
                     />
                 </Flex>
                 <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-                    <Text
-                        textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                        fontFamily={'heading'}
-                        color={useColorModeValue('gray.800', 'white')}>
-                        <Link href='/'> SampleApp</Link>
+                    <Link href='/'>
+                        <Text
+                            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+                            fontFamily={'heading'}
+                            color={useColorModeValue('gray.800', 'white')}>
+                            SampleApp
                     </Text>
+                    </Link>
 
                     <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
                         <DesktopNav />
@@ -98,10 +101,8 @@ export default function Navbar({ }) {
                         </MenuButton>
                         <MenuList>
                             <MenuGroup title='Profile'>
-                                <Link href={'/profile'}><MenuItem>View Profile</MenuItem></Link>
-                            </MenuGroup>
-                            <MenuGroup title='Sign out'>
-                                <MenuItem onClick={() => signOut()} bg={'pink.200'} m='2'> Sign out</MenuItem>
+                                <Link href={`/${session.user.id}`}><MenuItem>Profile</MenuItem></Link>
+                                <MenuItem onClick={() => signOut()} >Sign out</MenuItem>
                             </MenuGroup>
                         </MenuList>
                     </Menu>

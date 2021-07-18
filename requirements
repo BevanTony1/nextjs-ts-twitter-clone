@@ -6,3 +6,4 @@ npm install --save next-auth
 npm install prisma -D
 npm install @prisma/client
 npx prisma init
+npm install swr 

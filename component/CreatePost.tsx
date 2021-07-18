@@ -2,19 +2,19 @@ import { User, Post } from '@prisma/client'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useSession } from 'next-auth/client'
 import {
+    Center,
     Stack,
     FormControl,
     Input,
     Button,
     useColorModeValue,
     Heading,
-    Container,
+    Box,
     Avatar,
+    Container,
 } from '@chakra-ui/react';
 
-interface CreatePostProps {
-    onAddPosts: (post: Post & { user: User }) => void;
-}
+
 
 
 type FormData = {
@@ -22,7 +22,7 @@ type FormData = {
 }
 
 
-export default function CreatePost(props: CreatePostProps) {
+export default function CreatePost() {
 
     const [session] = useSession()
 
@@ -37,17 +37,18 @@ export default function CreatePost(props: CreatePostProps) {
             })
             setValue('text', '')
             const res = await req.json();
-            props.onAddPosts(res);
         } catch (err) {
             console.log(err)
         }
     }
     return (
-        <Container
+            
+       <Container
             maxW={'lg'}
-            bg={useColorModeValue('white', 'whiteAlpha.100')}
+            bg={'white'}
             boxShadow={'xl'}
-            rounded={'lg'}
+            rounded={'md'}
+            marginInline={'0'}
             p={6}
             direction={'column'}>
             <Heading
@@ -63,7 +64,11 @@ export default function CreatePost(props: CreatePostProps) {
                 as={'form'}
                 spacing={'12px'}
                 onSubmit={handleSubmit(onSubmit)}>
-                <Avatar src={session?.user.image}/>
+                    <Center>
+
+                <Avatar
+                src={session?.user.image}/>
+                </Center>
                 <FormControl>
                     <Input
                         variant={'solid'}
@@ -90,7 +95,7 @@ export default function CreatePost(props: CreatePostProps) {
                     </Button>
                 </FormControl>
             </Stack>
-
         </Container >
+
     );
 }
