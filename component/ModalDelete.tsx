@@ -30,7 +30,7 @@ export default function DeleteModal(props: any) {
       toast({
         title: "Post has Been deleted",
         description: "Successfully deleted Post.",
-        status: "success",
+        status: "error",
         duration: 9000,
         isClosable: true,
       })

@@ -9,7 +9,8 @@ import {
     Stack,
     useColorModeValue,
 } from '@chakra-ui/react';
-
+import { useSession } from 'next-auth/client'
+import { useRouter } from 'next/router'
 
 interface User {
     name?: string
@@ -17,8 +18,12 @@ interface User {
     image?: string
 }
 
-
 export const Profile: React.FC<User> = ({ name, email, image }) => {
+
+    const [session] = useSession()
+    const router = useRouter()
+
+
     return (
 
         <Box

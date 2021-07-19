@@ -32,13 +32,14 @@ export default function User() {
 
         })
         const res = await req.json();
+        router.push('/')
 
     }
 
-    const handleUnfollow = async () => {
+    // const handleUnfollow = async () => {
 
-    }
-    if (loading || !data) {
+    // }
+    if (loading || !data || !session) {
         return (
             <Center>
                 <Spinner />
