@@ -21,8 +21,14 @@ interface HomeProps {
 
 
 export default function Home(props: HomeProps) {
-  const { data, error } = useSWR('/api/posts', { refreshInterval: 1 })
   const [session, loading] = useSession()
+  if (!session) {
+    return (
+      <Landing />
+    )
+  }
+
+  const { data, error } = useSWR('/api/posts', { refreshInterval: 1 })
 
 
 
@@ -50,25 +56,17 @@ export default function Home(props: HomeProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {
-        session ? (
-          <Container maxW={'100%'} py={10}>
-            <SimpleGrid templateColumns={{ sm: '.5fr', md: '.5fr 1fr' }} spacing={['0', '13']}>
-              <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
-              <Stack>
-                <CreatePost />
-                {data.posts.map((post: HomeProps, key: number) => (
-                  <PostCard posts={post} key={key} />
-                ))}
-              </Stack>
-            </SimpleGrid>
-          </Container>
-        ) : (
-          <>
-            <Landing />
-          </>
-        )
-      }
+      <Container maxW={'100%'} py={10}>
+        <SimpleGrid templateColumns={{ sm: '.5fr', md: '.5fr 1fr' }} spacing={['0', '13']}>
+          <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
+          <Stack>
+            <CreatePost />
+            {data.posts.map((post: HomeProps, key: number) => (
+              <PostCard posts={post} key={key} />
+            ))}
+          </Stack>
+        </SimpleGrid>
+      </Container>
 
 
 
