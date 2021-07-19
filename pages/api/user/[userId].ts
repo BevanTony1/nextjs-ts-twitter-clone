@@ -7,8 +7,13 @@ export default async function handle(req: NextApiRequest, res: NextApiResponse,)
         const user = await prisma.user.findUnique({
             where: {
                 id: String(userId)
-            }
+            },
+            include: {
+                relationships: true,
+                posts: true
+            },
         })
+        console.log(user)
         res.status(200).json({ user })
 
     } catch (err) {

@@ -8,7 +8,7 @@ import { Loading } from '../component/Loading'
 import Landing from '../component/Landing'
 import { PostCard } from '../component/PostCard'
 import CreatePost from '../component/CreatePost'
-import { Container, Center, Grid, Spinner, Flex, Box, Stack, SimpleGrid } from '@chakra-ui/react'
+import { Container, Center, Grid, Spinner, Flex, Box, Stack, SimpleGrid, Divider } from '@chakra-ui/react'
 import { Post, User } from '@prisma/client'
 
 
@@ -52,8 +52,8 @@ export default function Home(props: HomeProps) {
 
       {
         session ? (
-          <Container as={Stack} maxW={'100%'} py={10}>
-            <SimpleGrid templateColumns={{ sm: '.5fr', md: '.5fr 1fr' }} spacing={0}>
+          <Container maxW={'100%'} py={10}>
+            <SimpleGrid templateColumns={{ sm: '.5fr', md: '.5fr 1fr' }} spacing={['0', '13']}>
               <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
               <Stack>
                 <CreatePost />

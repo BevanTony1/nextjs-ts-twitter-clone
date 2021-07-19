@@ -23,13 +23,12 @@ export const Profile: React.FC<User> = ({ name, email, image }) => {
 
         <Box
             maxW={['450px', '450px', '250px']}
-            maxH={['450px', '450px', '250px']}
+            maxH={['450px', '450px', '300px']}
             w={'full'}
             bg={useColorModeValue('white', 'gray.800')}
             boxShadow={'2xl'}
             marginLeft={[0, 0, 5]}
             marginRight={[0, 0, 5]}
-            marginButtom={[0, 0, 5]}
             rounded={['none', 'md', 'md']}
             overflow={'hidden'}>
             <Image
@@ -53,7 +52,7 @@ export const Profile: React.FC<User> = ({ name, email, image }) => {
 
             <Box p={6}>
                 <Stack spacing={0} align={'center'} mb={5}>
-                    <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
+                    <Heading textAlign='center' fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
                         {name}
                     </Heading>
                     <Text color={'gray.500'}>{email}</Text>

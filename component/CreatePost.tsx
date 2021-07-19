@@ -9,7 +9,7 @@ import {
     Button,
     useColorModeValue,
     Heading,
-    Box,
+    useToast,
     Avatar,
     Container,
 } from '@chakra-ui/react';
@@ -25,7 +25,7 @@ type FormData = {
 export default function CreatePost() {
 
     const [session] = useSession()
-
+    const toast = useToast()
     const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit: SubmitHandler<FormData> = async (data) => {
         try {
@@ -37,6 +37,14 @@ export default function CreatePost() {
             })
             setValue('text', '')
             const res = await req.json();
+            toast({
+                title: "New Post",
+                description: "Post has been successful",
+                status: "info",
+                duration: 9000,
+                isClosable: true,
+              })
+
         } catch (err) {
             console.log(err)
         }
@@ -47,9 +55,9 @@ export default function CreatePost() {
             maxW={'lg'}
             bg={'white'}
             boxShadow={'xl'}
-            rounded={'md'}
             marginInline={'0'}
             p={6}
+            rounded={['none', 'md', 'md']}
             direction={'column'}>
             <Heading
                 as={'h2'}
