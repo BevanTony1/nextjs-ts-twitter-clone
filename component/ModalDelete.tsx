@@ -8,20 +8,35 @@ import {
   ModalBody,
   Text,
   useDisclosure,
+  useToast,
   ModalCloseButton,
 } from "@chakra-ui/react"
 import { useForm } from 'react-hook-form'
 
 export default function DeleteModal(props: any) {
   const { handleSubmit, formState } = useForm();
+  const toast = useToast()
   const onSubmit = async () => {
-    const res = await fetch('/api/post', {
-      headers: { 'Content-Type': 'application/json' },
-      method: 'DELETE',
-      body: JSON.stringify({
-        id: props.posts.id
+    try {
+
+      const res = await fetch('/api/post', {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'DELETE',
+        body: JSON.stringify({
+          id: props.posts.id
+        })
       })
-    })
+
+      toast({
+        title: "Post has Been deleted",
+        description: "Successfully deleted Post.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      })
+    } catch (err) {
+      console.log(err)
+    }
   };
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (

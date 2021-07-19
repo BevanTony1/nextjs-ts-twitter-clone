@@ -14,12 +14,30 @@ import {
 import useSWR from 'swr';
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/client'
-
 export default function User() {
+
     const router = useRouter()
     const [session, loading] = useSession()
     const userId = router.query.userId
     const { data, error } = useSWR(`/api/user/${userId}`)
+
+    const handleFollow = async () => {
+        const req = await fetch('api/follow', {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'POST',
+            body: JSON.stringify({
+                userId,
+                ownerId: session?.user.id
+            })
+
+        })
+        const res = await req.json();
+
+    }
+
+    const handleUnfollow = async () => {
+
+    }
     if (loading || !data) {
         return (
             <Center>
@@ -27,6 +45,7 @@ export default function User() {
             </Center>
         )
     }
+    console.log(data)
 
 
     return (
@@ -41,10 +60,10 @@ export default function User() {
                 textAlign={'center'}>
                 <Avatar
                     size={'xl'}
+                    alt={'Profile Image'}
                     src={
                         data.user.image
                     }
-                    alt={'Avatar Alt'}
                     mb={4}
                     pos={'relative'}
                     _after={{
@@ -127,6 +146,7 @@ export default function User() {
                                 rounded={'full'}
                                 bg={'blue.400'}
                                 color={'white'}
+                                onClick={() => handleFollow()}
                                 boxShadow={
                                     '0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)'
                                 }

@@ -17,7 +17,7 @@ export default async function handle(req: any, res: any) {
 
                 },
                 include: {
-                    User: true
+                    User: true,
                 },
 
             });

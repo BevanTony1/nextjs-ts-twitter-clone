@@ -9,7 +9,8 @@ import {
     Input,
     ModalCloseButton,
     Button,
-    useDisclosure
+    useDisclosure,
+    useToast,
 } from "@chakra-ui/react"
 import { useForm } from 'react-hook-form'
 
@@ -23,20 +24,37 @@ interface ModalProps {
 export default function ModalUpdate(props: any) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const { register, handleSubmit, reset, setValue, formState } = useForm();
+    const toast = useToast()
     const onSubmit = async (data: ModalProps) => {
-        const res = await fetch('api/post', {
-            headers: { 'Content-Type': 'application/json' },
-            method: 'PUT',
-            body: JSON.stringify({
-                id: props.posts.id,
-                text: data.text
+        try {
+
+            const res = await fetch('api/post', {
+                headers: { 'Content-Type': 'application/json' },
+                method: 'PUT',
+                body: JSON.stringify({
+                    id: props.posts.id,
+                    text: data.text
+                })
             })
-        })
-        if (!res.ok) {
-            throw new Error(res.statusText)
+
+            toast({
+                title: "Post has been updated.",
+                description: "Successfully updated Post",
+                status: "info",
+                duration: 9000,
+                isClosable: true,
+            })
+
+        } catch (err) {
+            console.log('Something went wrong')
         }
-        return await res.json()
-    };
+
+        // if (!res.ok) {
+        //     throw new Error(res.statusText)
+        // }
+        // return await res.json()
+
+    }
     return (
         <>
             <Text w='100%' onClick={onOpen}>Edit</Text>
