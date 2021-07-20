@@ -13,7 +13,7 @@ export default function WithLargeQuote() {
                 fontSize={{ base: 'xl', md: '2xl' }}
                 textAlign={'center'}
                 maxW={'3xl'}>
-                CRUD Demo Application using NextJS as the frontend framework and Prisma as the Database
+                CRUD Demo Application using NextJS as the frontend framework and PosgresSQL as the database.
       </Text>
             <Box textAlign={'center'}>
                 <Avatar

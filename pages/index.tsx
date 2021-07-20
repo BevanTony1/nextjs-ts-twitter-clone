@@ -13,7 +13,6 @@ import { Post, User } from '@prisma/client'
 
 
 
-
 interface HomeProps {
   posts: Post & User
 }
@@ -61,6 +60,7 @@ export default function Home(props: HomeProps) {
           <Profile name={session.user.name} email={session.user.email} image={session.user.image} />
           <Stack>
             <CreatePost />
+
             {data.posts.map((post: HomeProps, key: number) => (
               <PostCard posts={post} key={key} />
             ))}
